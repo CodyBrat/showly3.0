@@ -1,0 +1,78 @@
+/* Background circles */
+.background-circles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.circle {
+  position: absolute;
+  border-radius: 50%;
+}
+
+.circle1 {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70vh;
+  height: 70vh;
+  border: 1px dashed rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 40px rgba(150, 150, 150, 0.07);
+}
+
+.circle2 {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 85vh;
+  height: 85vh;
+  border: 1px dashed rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 60px rgba(150, 150, 150, 0.05);
+}
+
+.circle3 {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100vh;
+  height: 100vh;
+  border: 1px dashed rgba(255, 255, 255, 0.1);
+  background: radial-gradient(circle, rgba(120,120,120,0.05) 0%, rgba(30,30,30,0) 70%);
+}
+
+/* Background light effects */
+.landing-container::before {
+  content: "";
+  position: absolute;
+  top: 35%;
+  right: 40%;
+  width: 100vh;
+  height: 100vh;
+  background: radial-gradient(ellipse at center, rgba(180,180,180,0.15) 0%, rgba(30,30,30,0) 70%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.landing-container::after {
+  content: "";
+  position: absolute;
+  top: 45%;
+  left: 45%;
+  width: 60vh;
+  height: 60vh;
+  background: radial-gradient(ellipse at center, rgba(100,100,255,0.03) 0%, rgba(30,30,30,0) 70%);
+  z-index: 0;
+  pointer-events: none;
+  filter: blur(10px);
+}
+
+@media (max-width: 768px) {
+  .circle1, .circle2, .circle3 {
+    width: 80vw;
+    height: 80vw;
+  }
+} 
