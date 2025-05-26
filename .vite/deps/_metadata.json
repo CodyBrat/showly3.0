@@ -1,0 +1,112 @@
+{
+  "hash": "d72f66d0",
+  "configHash": "5319bf4b",
+  "lockfileHash": "580780f7",
+  "browserHash": "3c8103bb",
+  "optimized": {
+    "react": {
+      "src": "../../node_modules/react/index.js",
+      "file": "react.js",
+      "fileHash": "2c9cb33b",
+      "needsInterop": true
+    },
+    "react-dom/client": {
+      "src": "../../node_modules/react-dom/client.js",
+      "file": "react-dom_client.js",
+      "fileHash": "0dcc0ac3",
+      "needsInterop": true
+    },
+    "react-router-dom": {
+      "src": "../../node_modules/react-router-dom/dist/index.mjs",
+      "file": "react-router-dom.js",
+      "fileHash": "27c76bfa",
+      "needsInterop": false
+    },
+    "framer-motion": {
+      "src": "../../node_modules/framer-motion/dist/es/index.mjs",
+      "file": "framer-motion.js",
+      "fileHash": "e30eecdc",
+      "needsInterop": false
+    },
+    "ogl": {
+      "src": "../../node_modules/ogl/src/index.js",
+      "file": "ogl.js",
+      "fileHash": "3a039b74",
+      "needsInterop": false
+    },
+    "@react-three/fiber": {
+      "src": "../../node_modules/@react-three/fiber/dist/react-three-fiber.esm.js",
+      "file": "@react-three_fiber.js",
+      "fileHash": "50691dce",
+      "needsInterop": false
+    },
+    "@react-three/drei": {
+      "src": "../../node_modules/@react-three/drei/index.js",
+      "file": "@react-three_drei.js",
+      "fileHash": "cfbe4b1f",
+      "needsInterop": false
+    },
+    "@react-three/rapier": {
+      "src": "../../node_modules/@react-three/rapier/dist/react-three-rapier.esm.js",
+      "file": "@react-three_rapier.js",
+      "fileHash": "3ddd297e",
+      "needsInterop": false
+    },
+    "meshline": {
+      "src": "../../node_modules/meshline/dist/index.js",
+      "file": "meshline.js",
+      "fileHash": "39fadffb",
+      "needsInterop": false
+    },
+    "three": {
+      "src": "../../node_modules/three/build/three.module.js",
+      "file": "three.js",
+      "fileHash": "b2021c23",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "hls-MJ5CGT6E": {
+      "file": "hls-MJ5CGT6E.js"
+    },
+    "vision_bundle-NVRH4MT4": {
+      "file": "vision_bundle-NVRH4MT4.js"
+    },
+    "rapier.es-JKLTON4M": {
+      "file": "rapier__es-JKLTON4M.js"
+    },
+    "chunk-7A3NXVIS": {
+      "file": "chunk-7A3NXVIS.js"
+    },
+    "chunk-Y5A7JFWI": {
+      "file": "chunk-Y5A7JFWI.js"
+    },
+    "chunk-KCWZ2LTY": {
+      "file": "chunk-KCWZ2LTY.js"
+    },
+    "chunk-MWUQT4FA": {
+      "file": "chunk-MWUQT4FA.js"
+    },
+    "chunk-XODHDMH7": {
+      "file": "chunk-XODHDMH7.js"
+    },
+    "chunk-Z47KTGZ2": {
+      "file": "chunk-Z47KTGZ2.js"
+    },
+    "chunk-MZQM2S45": {
+      "file": "chunk-MZQM2S45.js"
+    },
+    "chunk-TU5VFCAQ": {
+      "file": "chunk-TU5VFCAQ.js"
+    },
+    "chunk-MQZP6FJC": {
+      "file": "chunk-MQZP6FJC.js"
+    },
+    "chunk-4X6FFAZQ": {
+      "file": "chunk-4X6FFAZQ.js"
+    },
+    "chunk-EWTE5DHJ": {
+      "file": "chunk-EWTE5DHJ.js"
+    }
+  }
+}

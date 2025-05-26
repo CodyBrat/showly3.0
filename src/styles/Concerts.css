@@ -1,0 +1,2015 @@
+/* Cosmic Concerts page styling */
+:root {
+  --cosmic-bg: #080808;
+  --cosmic-text: #ffffff;
+  --cosmic-accent: #b0b0b0;
+  --cosmic-glow: #f0f0f0;
+  --cosmic-secondary: #2c2c2c;
+  --cosmic-dark: #111111;
+  --cosmic-gradient: linear-gradient(135deg, #ffffff, #303030);
+  --cosmic-box-shadow: 0 8px 24px rgba(255, 255, 255, 0.15);
+  --cosmic-border-glow: 0 0 15px rgba(255, 255, 255, 0.4);
+  --cosmic-card-bg: rgba(20, 20, 20, 0.6);
+  --cosmic-transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  --spotify-green: #1db954;
+  --spotify-black: #191414;
+  --player-bg: rgba(15, 15, 15, 0.9);
+  --player-progress: #f0f0f0;
+  --player-button: rgba(255, 255, 255, 0.7);
+}
+
+/* Page container */
+.cosmic-concerts-page {
+  background-color: var(--cosmic-bg);
+  color: var(--cosmic-text);
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  font-family: 'Inter', sans-serif;
+  padding-bottom: 5rem;
+  background: linear-gradient(180deg, #080808, #0a0a0a);
+}
+
+/* Add a container for content alignment */
+.cosmic-container {
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* Cosmic background elements */
+.cosmic-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(145deg, #080808, #111111);
+}
+
+.cosmic-orb {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, rgba(200, 200, 200, 0.1) 40%, rgba(8, 8, 8, 0) 70%);
+  border-radius: 50%;
+  z-index: 1;
+  opacity: 0.7;
+  filter: blur(60px);
+  animation: pulse 15s infinite alternate ease-in-out;
+}
+
+@keyframes pulse {
+  0% { transform: translate(-50%, -50%) scale(1); opacity: 0.7; }
+  50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.5; }
+  100% { transform: translate(-50%, -50%) scale(1); opacity: 0.7; }
+}
+
+.cosmic-stars {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background-color: white;
+  border-radius: 50%;
+  opacity: 0.7;
+  animation: twinkle linear infinite;
+}
+
+.star:nth-child(5n+1) {
+  width: 3px;
+  height: 3px;
+}
+
+.star:nth-child(11n+3) {
+  width: 1px;
+  height: 1px;
+  opacity: 0.5;
+}
+
+@keyframes twinkle {
+  0% { opacity: 0.2; }
+  50% { opacity: 0.8; }
+  100% { opacity: 0.2; }
+}
+
+/* Cassette and vinyl decorative elements */
+.floating-cassette {
+  position: absolute;
+  width: 120px;
+  height: 70px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+  animation: floating 12s infinite ease-in-out;
+  z-index: 1;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+}
+
+.cassette-1 {
+  top: 15%;
+  right: 10%;
+  transform: rotate(15deg);
+  animation-delay: 0s;
+}
+
+.cassette-2 {
+  bottom: 20%;
+  left: 12%;
+  transform: rotate(-10deg);
+  animation-delay: 4s;
+}
+
+.cassette-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background: linear-gradient(150deg, #1e1e1e, #282828);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.cassette-inner::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60%;
+  height: 30%;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.cassette-wheels {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0 15%;
+}
+
+.wheel {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: #111;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  position: relative;
+  animation: spin 5s linear infinite;
+}
+
+.wheel::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 5px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+}
+
+.floating-vinyl {
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background: #111;
+  top: 65%;
+  right: 15%;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+  animation: floatingVinyl 15s infinite ease-in-out;
+  transform: rotate(20deg);
+  z-index: 1;
+}
+
+.vinyl-inner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30%;
+  height: 30%;
+  background: linear-gradient(135deg, #a0a0a0, #303030);
+  border-radius: 50%;
+}
+
+.vinyl-inner::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30%;
+  height: 30%;
+  background: #111;
+  border-radius: 50%;
+}
+
+.laser-beam {
+  position: absolute;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.8));
+  animation: laserMove 8s infinite alternate ease-in-out;
+  z-index: 1;
+}
+
+.beam-1 {
+  width: 200px;
+  top: 30%;
+  left: 10%;
+  transform: rotate(20deg);
+  animation-delay: 0s;
+}
+
+.beam-2 {
+  width: 300px;
+  bottom: 40%;
+  right: 5%;
+  transform: rotate(-15deg);
+  animation-delay: 3s;
+}
+
+@keyframes floating {
+  0% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(5deg); }
+  100% { transform: translateY(0) rotate(0deg); }
+}
+
+@keyframes floatingVinyl {
+  0% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-30px) rotate(180deg); }
+  100% { transform: translateY(0) rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes laserMove {
+  0% { transform: scaleX(0.5) rotate(var(--rotation, 0deg)); opacity: 0.3; }
+  50% { transform: scaleX(1.2) rotate(var(--rotation, 0deg)); opacity: 0.8; }
+  100% { transform: scaleX(0.5) rotate(var(--rotation, 0deg)); opacity: 0.3; }
+}
+
+/* Spotify-inspired mini player */
+.spotify-mini-player {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 320px;
+  background: linear-gradient(145deg, #1a1a1a, #242424);
+  border-radius: 10px;
+  padding: 1rem;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.mini-player-content {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  height: 100%;
+}
+
+.mini-player-cover {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  margin-right: 1rem;
+  background: linear-gradient(145deg, #1a1a1a, #242424);
+}
+
+.mini-player-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.mini-play-icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  cursor: pointer;
+}
+
+.mini-play-icon svg {
+  width: 24px;
+  height: 24px;
+  color: white;
+}
+
+.mini-player-cover:hover .mini-play-icon {
+  opacity: 1;
+}
+
+.mini-player-info {
+  margin-left: 12px;
+  flex: 1;
+  overflow: hidden;
+}
+
+.mini-track-name {
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 4px;
+}
+
+.mini-artist-name {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.7);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mini-player-controls {
+  display: flex;
+  align-items: center;
+  margin-left: 12px;
+}
+
+.mini-volume-slider {
+  width: 60px;
+  -webkit-appearance: none;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 2px;
+  outline: none;
+}
+
+.mini-volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 12px;
+  height: 12px;
+  background: var(--spotify-green);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.mini-player-button {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #333333, #222222);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin-left: 10px;
+  color: var(--cosmic-text);
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.mini-player-button:hover {
+  background: linear-gradient(145deg, #444444, #333333);
+  transform: translateY(-2px);
+}
+
+.mini-player-button svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* Spotify player overlay */
+.spotify-player-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.spotify-player {
+  background: linear-gradient(145deg, #1a1a1a, #242424);
+  border-radius: 15px;
+  overflow: hidden;
+  max-width: 800px;
+  width: 90%;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+.spotify-player-header {
+  background: linear-gradient(90deg, #2a2a2a, #202020);
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.spotify-player-header h3 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.close-button {
+  background: linear-gradient(135deg, #444444, #2a2a2a);
+  border: none;
+  color: white;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.close-button:hover {
+  background: linear-gradient(135deg, #555555, #333333);
+}
+
+.spotify-player-content {
+  padding: 0;
+}
+
+/* Vinyl record display improvements */
+.vinyl-display {
+  position: relative;
+  width: 250px;
+  height: 250px;
+  margin: 40px auto 0;
+  transform: scale(1.2);
+}
+
+.vinyl-record {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  background-color: #0a0a0a;
+  border-radius: 50%;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+
+.vinyl-record.spin-animation {
+  animation: rotate 10s linear infinite;
+}
+
+.vinyl-record::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 95%;
+  height: 95%;
+  border-radius: 50%;
+  background-image: repeating-radial-gradient(
+    circle at center,
+    #111111,
+    #111111 1px,
+    #202020 1px,
+    #202020 2px
+  );
+  opacity: 0.7;
+}
+
+.vinyl-label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30%;
+  height: 30%;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #d8d8d8, #404040);
+  overflow: hidden;
+}
+
+.vinyl-arm {
+  position: absolute;
+  top: 45%;
+  right: 0;
+  width: 120px;
+  height: 10px;
+  background: linear-gradient(90deg, #5a5a5a, #333333);
+  border-radius: 5px;
+  transform: rotate(-20deg);
+  transform-origin: right center;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.5);
+  z-index: 3;
+}
+
+.vinyl-arm::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  right: 10px;
+  width: 20px;
+  height: 20px;
+  background: linear-gradient(135deg, #555555, #333333);
+  border-radius: 50%;
+}
+
+.vinyl-arm::after {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: 15px;
+  width: 12px;
+  height: 12px;
+  background: #444;
+  border-radius: 50%;
+  border: 2px solid #555;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Equalizer animation for section titles */
+.equalizer-animation {
+  display: inline-flex;
+  height: 20px;
+  align-items: flex-end;
+  gap: 3px;
+  margin-left: 15px;
+  vertical-align: middle;
+}
+
+.equalizer-bar {
+  width: 4px;
+  height: 12px;
+  background: linear-gradient(to top, #ffffff, #808080);
+  margin: 0 2px;
+  border-radius: 2px;
+  animation: equalize 1.5s ease-in-out infinite;
+}
+
+.equalizer-bar:nth-child(1) {
+  height: 10px;
+  animation-delay: 0s;
+}
+
+.equalizer-bar:nth-child(2) {
+  height: 16px;
+  animation-delay: 0.2s;
+}
+
+.equalizer-bar:nth-child(3) {
+  height: 12px;
+  animation-delay: 0.4s;
+}
+
+.equalizer-bar:nth-child(4) {
+  height: 8px;
+  animation-delay: 0.6s;
+}
+
+@keyframes equalize {
+  0% { height: 5px; }
+  50% { height: 20px; }
+  100% { height: 5px; }
+}
+
+/* Hero section */
+.cosmic-hero {
+  position: relative;
+  min-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 6rem 0 4rem;
+  z-index: 1;
+  text-align: center;
+}
+
+.cosmic-title-container {
+  margin-bottom: 3rem;
+}
+
+.cosmic-title {
+  font-size: 8rem;
+  font-weight: 900;
+  letter-spacing: -0.05em;
+  line-height: 1;
+  margin: 0 0 0.5rem;
+  background: linear-gradient(to bottom, #ffffff, #a0a0a0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+  position: relative;
+  transform: skew(-5deg);
+  animation: cosmic-title-glow 3s infinite alternate;
+  z-index: 2;
+}
+
+@keyframes cosmic-title-glow {
+  from { text-shadow: 0 0 15px rgba(255, 255, 255, 0.4); }
+  to { text-shadow: 0 0 25px rgba(255, 255, 255, 0.7), 0 0 40px rgba(255, 255, 255, 0.4); }
+}
+
+.cosmic-subtitle {
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 4px;
+  margin-top: 0.5rem;
+  opacity: 0.8;
+  color: #b0b0b0;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+/* Audio waveform */
+.audio-waveform-cosmic {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 120px;
+  width: 100%;
+  margin: 1rem 0;
+  padding: 0 1rem;
+}
+
+.waveform-bar-cosmic {
+  background: linear-gradient(to top, rgba(40, 40, 40, 0.5), rgba(255, 255, 255, 0.9));
+  margin: 0 2px;
+  width: 3px;
+  animation: waveform-animation 1.2s ease-in-out infinite;
+  animation-delay: calc(var(--i) * 0.05s);
+  border-radius: 1px;
+  transform-origin: bottom;
+}
+
+@keyframes waveform-animation {
+  0%, 100% { transform: scaleY(0.5); opacity: 0.5; }
+  50% { transform: scaleY(1); opacity: 1; }
+}
+
+/* Section styling */
+.cosmic-section-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 3rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.glow-text {
+  color: #ffffff;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+  font-weight: 700;
+}
+
+/* Featured concerts */
+.cosmic-featured-section {
+  padding: 5rem 0;
+  position: relative;
+  z-index: 2;
+}
+
+.cosmic-featured-showcase {
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 0 2rem;
+}
+
+.cosmic-featured-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 340px);
+  gap: 1.5rem;
+  margin: 2rem 0;
+  padding: 0;
+  width: 100%;
+  justify-content: center;
+}
+
+.cosmic-concert-card {
+  background: var(--cosmic-card-bg);
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+  transition: var(--cosmic-transition);
+  cursor: pointer;
+  height: 510px; /* Taller height for movie poster look */
+  width: 340px; /* Fixed width for movie poster look */
+  justify-self: center;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transform: perspective(1000px) rotateY(0deg);
+  transform-style: preserve-3d;
+}
+
+.cosmic-concert-card.active, 
+.cosmic-concert-card:hover {
+  transform: perspective(1000px) rotateY(5deg) scale(1.02);
+  z-index: 10;
+}
+
+.cosmic-concert-card.active .cosmic-glowing-border,
+.cosmic-concert-card:hover .cosmic-glowing-border {
+  opacity: 1;
+}
+
+.cosmic-glowing-border {
+  position: absolute;
+  inset: 0;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.3), inset 0 0 10px rgba(255, 255, 255, 0.1);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+
+.cosmic-concert-image {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.cosmic-concert-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+  filter: contrast(1.1) saturate(1.1);
+}
+
+.cosmic-concert-card:hover .cosmic-concert-image img {
+  transform: scale(1.05);
+}
+
+.cosmic-concert-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.1) 0%,
+    rgba(0, 0, 0, 0.3) 50%,
+    rgba(0, 0, 0, 0.9) 90%
+  );
+  z-index: 2;
+}
+
+/* Film-like scanlines effect */
+.cosmic-concert-overlay::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent,
+    transparent 1px,
+    rgba(0, 0, 0, 0.1) 1px,
+    rgba(0, 0, 0, 0.1) 2px
+  );
+  opacity: 0.3;
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* Coming soon badge */
+.cosmic-concert-image::after {
+  content: 'COMING SOON';
+  position: absolute;
+  top: 2rem;
+  right: -3.5rem;
+  background: rgba(255, 215, 0, 0.8);
+  color: black;
+  font-size: 0.75rem;
+  font-weight: bold;
+  padding: 0.3rem 4rem;
+  transform: rotate(45deg);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  z-index: 10;
+  letter-spacing: 1px;
+}
+
+.cosmic-concert-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 1.5rem;
+  z-index: 3;
+  transform: translateY(0);
+  transition: transform 0.3s ease;
+}
+
+.cosmic-date-badge {
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--cosmic-dark);
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  display: inline-block;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.cosmic-concert-title {
+  color: white;
+  font-size: 1.6rem;
+  margin: 0.5rem 0;
+  font-weight: 700;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+  letter-spacing: 1px;
+}
+
+.cosmic-concert-artist {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.cosmic-concert-details {
+  height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease, height 0.3s ease;
+}
+
+.cosmic-concert-details.visible {
+  height: auto;
+  opacity: 1;
+}
+
+.cosmic-detail-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.cosmic-detail-icon {
+  margin-right: 0.5rem;
+  color: var(--cosmic-accent);
+}
+
+.cosmic-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.cosmic-tag {
+  display: inline-block;
+  padding: 0.3rem 0.7rem;
+  background: linear-gradient(135deg, #444444, #2a2a2a);
+  border-radius: 20px;
+  font-size: 0.7rem;
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Button styling */
+.cosmic-button {
+  display: inline-block;
+  padding: 0.6rem 1.5rem;
+  background: linear-gradient(135deg, #ffffff, #505050);
+  color: #000000;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.cosmic-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3), 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.cosmic-buttons-row {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.reserve-btn {
+  flex: 3;
+  margin-top: 0;
+  background: linear-gradient(135deg, #ffffff, #505050);
+  color: #000000;
+}
+
+.spotify-btn {
+  flex: 1;
+  margin-top: 0;
+  background: linear-gradient(135deg, #444444, #2a2a2a);
+  color: var(--cosmic-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.spotify-btn:hover {
+  background: #1ed760;
+}
+
+/* Category filter */
+.cosmic-category-filter {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 2rem auto 4rem;
+  padding: 0;
+  position: relative;
+  z-index: 2;
+}
+
+.cosmic-category-filter button {
+  background: rgba(40, 40, 40, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--cosmic-text);
+  padding: 0.6rem 1.2rem;
+  border-radius: 30px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--cosmic-transition);
+  backdrop-filter: blur(5px);
+}
+
+.cosmic-category-filter button:hover {
+  background: rgba(60, 60, 60, 0.8);
+  transform: translateY(-2px);
+}
+
+.cosmic-category-filter button.active {
+  background: linear-gradient(135deg, #ffffff, #505050);
+  color: #000000;
+  font-weight: 600;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Upcoming concerts section */
+.cosmic-upcoming-section {
+  padding: 5rem 0;
+  position: relative;
+  z-index: 2;
+}
+
+.cosmic-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2.5rem;
+  margin: 0 auto;
+  max-width: 1400px;
+}
+
+.cosmic-upcoming-card {
+  position: relative;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  background: rgba(15, 15, 25, 0.8);
+  border: 1px solid rgba(100, 100, 255, 0.2);
+  transition: all 0.4s ease;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.cosmic-upcoming-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 15px 50px rgba(0, 0, 40, 0.5), 0 0 20px rgba(80, 80, 255, 0.3);
+  border-color: rgba(150, 150, 255, 0.4);
+}
+
+.cosmic-upcoming-card:hover .cosmic-upcoming-overlay {
+  opacity: 1;
+}
+
+.cosmic-upcoming-image {
+  width: 100%;
+  height: 320px;
+  position: relative;
+  overflow: hidden;
+}
+
+.cosmic-upcoming-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.cosmic-upcoming-card:hover .cosmic-upcoming-image img {
+  transform: scale(1.15);
+}
+
+.cosmic-event-date {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: linear-gradient(135deg, rgba(255, 200, 50, 0.9), rgba(255, 140, 0, 0.9));
+  padding: 8px 12px;
+  border-radius: 8px;
+  color: #000;
+  font-weight: bold;
+  text-align: center;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  transform: rotate(5deg);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.cosmic-event-date .event-year {
+  font-size: 0.8rem;
+  margin-top: 2px;
+  opacity: 0.8;
+}
+
+.cosmic-upcoming-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top, rgba(0, 0, 20, 0.95) 20%, rgba(0, 0, 20, 0.7) 60%, rgba(0, 0, 20, 0.4) 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1.5rem;
+  opacity: 0.9;
+  transition: opacity 0.4s ease;
+}
+
+.concert-card-content {
+  transform: translateY(0);
+  transition: transform 0.4s ease;
+}
+
+.cosmic-upcoming-card:hover .concert-card-content {
+  transform: translateY(-10px);
+}
+
+.cosmic-upcoming-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0 0 0.3rem;
+  color: #fff;
+  text-shadow: 0 0 10px rgba(100, 100, 255, 0.5);
+}
+
+.cosmic-upcoming-artist {
+  font-size: 1.1rem;
+  margin: 0 0 1rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.cosmic-upcoming-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.info-icon {
+  opacity: 0.8;
+}
+
+.cosmic-upcoming-description {
+  max-height: 60px;
+  overflow: hidden;
+  margin-bottom: 1.2rem;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.7);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.cosmic-buttons-row {
+  display: flex;
+  gap: 0.8rem;
+}
+
+.cosmic-button.glow-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+.cosmic-button.glow-effect:before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transform: rotate(45deg);
+  transition: all 0.5s ease;
+  opacity: 0;
+}
+
+.cosmic-button.glow-effect:hover:before {
+  animation: glowSweep 1.5s infinite;
+  opacity: 1;
+}
+
+@keyframes glowSweep {
+  0% {
+    left: -50%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+.cosmic-upcoming-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 1rem;
+  border-top: 1px solid rgba(100, 100, 255, 0.15);
+}
+
+.cosmic-tag {
+  background: rgba(80, 80, 255, 0.2);
+  color: rgb(200, 200, 255);
+  font-size: 0.8rem;
+  padding: 0.3rem 0.7rem;
+  border-radius: 20px;
+  border: 1px solid rgba(100, 100, 255, 0.2);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+}
+
+.cosmic-tag:hover {
+  background: rgba(100, 100, 255, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 10px rgba(0, 0, 50, 0.3);
+}
+
+/* Venues section */
+.cosmic-venues-section {
+  padding: 5rem 0;
+  position: relative;
+  z-index: 2;
+}
+
+.cosmic-venues-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  width: 100%;
+  justify-content: center;
+}
+
+.cosmic-venue-card {
+  display: flex;
+  flex-direction: column;
+  border-radius: 12px;
+  overflow: hidden;
+  background: linear-gradient(145deg, #1a1a1a, #242424);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: var(--cosmic-transition);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+.cosmic-venue-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4), 0 0 15px rgba(255, 255, 255, 0.2);
+}
+
+.cosmic-venue-image {
+  position: relative;
+  height: 180px;
+  overflow: hidden;
+}
+
+.cosmic-venue-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.cosmic-venue-card:hover .cosmic-venue-image img {
+  transform: scale(1.1);
+}
+
+.cosmic-venue-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.7) 100%);
+  transition: all 0.3s ease;
+}
+
+.cosmic-venue-content {
+  padding: 1.5rem;
+  background: linear-gradient(145deg, #1a1a1a, #242424);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.cosmic-venue-name {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.cosmic-venue-location {
+  font-size: 0.9rem;
+  opacity: 0.8;
+  margin-bottom: 1.5rem;
+}
+
+.cosmic-venue-stats {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  flex: 1;
+}
+
+.cosmic-venue-stat {
+  display: flex;
+  flex-direction: column;
+}
+
+.cosmic-stat-value {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--cosmic-accent);
+}
+
+.cosmic-stat-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  opacity: 0.7;
+  margin-top: 0.3rem;
+}
+
+/* Footer styling */
+.cosmic-footer {
+  padding: 2rem;
+  text-align: center;
+  font-size: 0.8rem;
+  opacity: 0.7;
+  position: relative;
+  z-index: 2;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-top: 2rem;
+}
+
+/* Additional music player elements */
+.control-btn:hover {
+  color: white;
+  background: rgba(255, 255, 255, 0.1);
+  transform: scale(1.1);
+}
+
+.control-btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+.play-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.play-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+.progress-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  z-index: 2;
+  cursor: pointer;
+  margin: 0;
+  opacity: 0;
+}
+
+.progress-bar::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 12px;
+  height: 12px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.progress-bar::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Responsive adjustments */
+@media (max-width: 1280px) {
+  .cosmic-title {
+    font-size: 7rem;
+  }
+  
+  .floating-vinyl {
+    width: 140px;
+    height: 140px;
+  }
+  
+  .floating-cassette {
+    width: 100px;
+    height: 60px;
+  }
+  
+  .vinyl-display {
+    width: 160px;
+    height: 160px;
+  }
+  
+  .cosmic-concert-card {
+    width: 300px;
+    height: 450px;
+  }
+  
+  .cosmic-featured-grid {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    justify-items: center;
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .cosmic-title {
+    font-size: 6rem;
+  }
+  
+  .cosmic-subtitle {
+    font-size: 1.2rem;
+  }
+  
+  .cosmic-section-title {
+    font-size: 2rem;
+  }
+  
+  .cosmic-featured-grid,
+  .cosmic-grid,
+  .cosmic-venues-grid {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 0 1rem;
+  }
+  
+  .spotify-mini-player {
+    width: 250px;
+  }
+  
+  .mini-volume-slider {
+    width: 40px;
+  }
+  
+  .equalizer-animation {
+    height: 16px;
+  }
+  
+  .vinyl-arm {
+    width: 100px;
+    right: -30px;
+  }
+  
+  .laser-beam {
+    width: 150px;
+  }
+  
+  .cosmic-concert-card {
+    width: 280px;
+    height: 420px;
+  }
+  
+  .cosmic-concert-image::after {
+    font-size: 0.7rem;
+    right: -4rem;
+    padding: 0.25rem 4rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .cosmic-title {
+    font-size: 4rem;
+  }
+  
+  .cosmic-subtitle {
+    font-size: 1rem;
+    letter-spacing: 3px;
+  }
+  
+  .cosmic-section-title {
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+  }
+  
+  .cosmic-hero {
+    min-height: 60vh;
+    padding: 4rem 1rem 3rem;
+  }
+  
+  .cosmic-featured-section,
+  .cosmic-upcoming-section,
+  .cosmic-venues-section {
+    padding: 3rem 1rem;
+  }
+  
+  .cosmic-newsletter-title {
+    font-size: 2.2rem;
+  }
+  
+  .cosmic-newsletter-text {
+    font-size: 1rem;
+  }
+  
+  .cosmic-newsletter-form {
+    flex-direction: column;
+    height: auto;
+    gap: 10px;
+  }
+  
+  .cosmic-input,
+  .cosmic-newsletter-form .cosmic-button {
+    border-radius: 25px;
+    width: 100%;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .cosmic-category-filter {
+    margin: 1rem auto 3rem;
+  }
+  
+  .cosmic-category-filter button {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+  }
+  
+  .spotify-mini-player {
+    width: 200px;
+    height: 60px;
+  }
+  
+  .mini-player-cover {
+    width: 44px;
+    height: 44px;
+  }
+  
+  .mini-player-button {
+    width: 25px;
+    height: 25px;
+  }
+  
+  .vinyl-display {
+    width: 140px;
+    height: 140px;
+  }
+  
+  .floating-cassette, .floating-vinyl, .laser-beam {
+    display: none;
+  }
+  
+  .equalizer-animation {
+    display: none;
+  }
+  
+  .cosmic-featured-grid,
+  .cosmic-grid,
+  .cosmic-venues-grid {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 0 0.5rem;
+    gap: 1rem;
+  }
+  
+  .cosmic-concert-card {
+    width: 220px;
+    height: 330px;
+  }
+  
+  .cosmic-concert-title {
+    font-size: 1.3rem;
+  }
+  
+  .cosmic-concert-artist {
+    font-size: 0.9rem;
+  }
+  
+  .cosmic-date-badge {
+    font-size: 0.7rem;
+    padding: 0.3rem 0.6rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .cosmic-title {
+    font-size: 3.2rem;
+  }
+  
+  .cosmic-subtitle {
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+  }
+  
+  .cosmic-section-title {
+    font-size: 1.5rem;
+  }
+  
+  .cosmic-featured-grid,
+  .cosmic-grid,
+  .cosmic-venues-grid {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+  
+  .audio-waveform-cosmic {
+    gap: 3px;
+  }
+  
+  .waveform-bar-cosmic {
+    width: 3px;
+  }
+  
+  .cosmic-concert-title {
+    font-size: 1.4rem;
+  }
+  
+  .vinyl-display {
+    width: 120px;
+    height: 120px;
+    margin-top: 20px;
+  }
+  
+  .vinyl-arm {
+    display: none;
+  }
+  
+  .spotify-mini-player {
+    bottom: 10px;
+    left: 10px;
+    width: calc(100% - 20px);
+    max-width: none;
+  }
+  
+  .music-player {
+    width: 280px;
+    left: 10px;
+    bottom: 10px;
+  }
+  
+  .control-buttons {
+    gap: 15px;
+  }
+  
+  .play-btn {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .control-btn svg {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .play-btn svg {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .cosmic-newsletter {
+    padding: 3rem 1.5rem;
+  }
+  
+  .cosmic-newsletter-title {
+    font-size: 2rem;
+  }
+  
+  .cosmic-featured-grid,
+  .cosmic-grid,
+  .cosmic-venues-grid {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+  
+  .cosmic-concert-card {
+    width: 280px;
+    height: 420px;
+  }
+  
+  .cosmic-concert-title {
+    font-size: 1.4rem;
+  }
+}
+
+/* Fix for the music player hover */
+.music-player:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Making sure the vinyl record rotates correctly */
+@keyframes rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Music player - modern redesign (compact version) */
+.music-player {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 320px;
+  background: linear-gradient(145deg, #0f0f0f, #1a1a1a);
+  border-radius: 14px;
+  padding: 1.2rem;
+  z-index: 100;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 212, 128, 0.1);
+}
+
+.music-player:hover {
+  transform: translateX(-50%) translateY(-4px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 212, 128, 0.2);
+}
+
+.player-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.player-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.track-info {
+  margin-bottom: 0.4rem;
+  text-align: center;
+}
+
+.track-name {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+  background: linear-gradient(90deg, #e0b76b, #ffd880);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 2px 10px rgba(224, 183, 107, 0.2);
+  letter-spacing: 0.5px;
+}
+
+.track-artist {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 500;
+}
+
+.playback-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.control-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.control-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: none;
+  color: rgba(255, 255, 255, 0.8);
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.control-btn::before {
+  content: '';
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  right: 1px;
+  height: 50%;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.1), transparent);
+  border-radius: 24px 24px 0 0;
+  pointer-events: none;
+}
+
+.control-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.control-btn svg {
+  width: 18px;
+  height: 18px;
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.3));
+}
+
+.play-btn {
+  width: 52px;
+  height: 52px;
+  background: linear-gradient(145deg, #141414, #262626);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 212, 128, 0.15);
+}
+
+.play-btn::after {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, rgba(255, 212, 128, 0.1), transparent 70%);
+  pointer-events: none;
+}
+
+.play-btn:hover {
+  background: linear-gradient(145deg, #262626, #363636);
+  transform: translateY(-3px) scale(1.05);
+  border: 1px solid rgba(255, 212, 128, 0.3);
+}
+
+.play-btn svg {
+  width: 24px;
+  height: 24px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4));
+}
+
+.progress-container {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0 0.3rem;
+}
+
+.time-display {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.6);
+  min-width: 40px;
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+}
+
+.progress-bar-container {
+  flex: 1;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  position: relative;
+  overflow: visible;
+  cursor: pointer;
+}
+
+.progress-filled {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: linear-gradient(90deg, #c19b4a, #ffd880);
+  border-radius: 3px;
+  box-shadow: 0 0 10px rgba(255, 212, 128, 0.4);
+  pointer-events: none;
+}
+
+.progress-filled::after {
+  content: '';
+  position: absolute;
+  right: -5px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 10px;
+  height: 10px;
+  background: #ffd880;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(255, 212, 128, 0.6);
+}
+
+.progress-bar {
+  position: absolute;
+  top: -8px;
+  left: 0;
+  width: 100%;
+  height: 20px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  z-index: 2;
+  cursor: pointer;
+  margin: 0;
+  opacity: 0;
+}
+
+.progress-bar::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  background: linear-gradient(135deg, #ffd880, #c19b4a);
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  border: 2px solid rgba(0, 0, 0, 0.2);
+}
+
+.progress-bar::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  background: linear-gradient(135deg, #ffd880, #c19b4a);
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+/* Updated media queries for the music player */
+@media (max-width: 768px) {
+  .music-player {
+    width: 280px;
+    padding: 1rem;
+  }
+  
+  .track-name {
+    font-size: 1.05rem;
+  }
+  
+  .control-btn {
+    width: 34px;
+    height: 34px;
+  }
+  
+  .play-btn {
+    width: 46px;
+    height: 46px;
+  }
+  
+  .control-btn svg {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .play-btn svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .music-player {
+    width: calc(100% - 3rem);
+    left: 50%;
+    bottom: 1rem;
+    padding: 0.9rem;
+    border-radius: 12px;
+  }
+  
+  .track-name {
+    font-size: 1rem;
+  }
+  
+  .track-artist {
+    font-size: 0.8rem;
+  }
+  
+  .control-buttons {
+    gap: 1rem;
+  }
+  
+  .control-btn {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .play-btn {
+    width: 42px;
+    height: 42px;
+  }
+  
+  .control-btn svg {
+    width: 15px;
+    height: 15px;
+  }
+  
+  .play-btn svg {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .time-display {
+    font-size: 0.7rem;
+    min-width: 35px;
+  }
+} 

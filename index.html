@@ -2,9 +2,19 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="icon" type="image/png" href="/src/assets/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React</title>
+    <title>Showly - Book Shows, Movies and Events</title>
+    <script>
+      // Check if redirected from 404 page
+      const query = window.location.search;
+      const urlParams = new URLSearchParams(query);
+      const path = urlParams.get('path');
+      if (path) {
+        // Replace the current URL without the query parameter
+        window.history.replaceState(null, null, path);
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>

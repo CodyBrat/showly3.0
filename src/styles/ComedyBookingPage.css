@@ -1,0 +1,998 @@
+/* Comedy Booking Page Styles */
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:wght@400;700&display=swap');
+
+:root {
+  --comedy-primary: rgba(255, 87, 87, 0.9);
+  --comedy-secondary: rgba(255, 150, 150, 0.8);
+  --comedy-accent: #FFCC29;
+  --comedy-text: #333333;
+  --comedy-light: #ffffff;
+  --comedy-dark: #1a1a1a;
+  --comedy-success: #26de81;
+  --booking-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  --booking-border: 3px solid #333;
+}
+
+/* Base layout */
+.comedy-booking-page {
+  min-height: 100vh;
+  background-color: var(--comedy-dark);
+  color: var(--comedy-light);
+  position: relative;
+  font-family: 'Comic Neue', cursive;
+  overflow-x: hidden;
+}
+
+/* Loading state */
+.comedy-booking-page.loading {
+  overflow: hidden;
+  max-height: 100vh;
+}
+
+.comedy-booking-loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--comedy-dark);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.loader-spinner {
+  width: 60px;
+  height: 60px;
+  border: 6px solid rgba(255, 87, 87, 0.3);
+  border-top: 6px solid var(--comedy-primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1.5rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Backdrop */
+.comedy-booking-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.15;
+  filter: blur(8px);
+  z-index: 0;
+}
+
+.comedy-booking-backdrop::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, 
+    rgba(26, 26, 26, 0.7) 0%, 
+    rgba(26, 26, 26, 0.9) 100%);
+}
+
+/* Main container */
+.comedy-booking-container {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  padding-bottom: 4rem;
+}
+
+/* Header */
+.comedy-booking-header {
+  margin-bottom: 2rem;
+}
+
+.header-top {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+}
+
+.back-button {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--comedy-light);
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1.5rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.back-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.back-icon {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.show-headline {
+  flex: 1;
+}
+
+.show-headline h1 {
+  font-family: 'Bangers', cursive;
+  font-size: 3rem;
+  margin: 0;
+  margin-bottom: 0.5rem;
+  color: var(--comedy-light);
+  letter-spacing: 1px;
+  text-shadow: 3px 3px 0 var(--comedy-dark);
+}
+
+.show-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.dot {
+  font-size: 1.5rem;
+  line-height: 1;
+  margin: 0 0.3rem;
+  color: var(--comedy-accent);
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin-left: auto;
+  background: rgba(255, 204, 41, 0.2);
+  padding: 0.3rem 0.7rem;
+  border-radius: 20px;
+}
+
+.star {
+  color: var(--comedy-accent);
+}
+
+/* Booking progress */
+.booking-progress {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+  margin-top: 3rem;
+  position: relative;
+}
+
+.progress-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+  cursor: default;
+}
+
+.progress-step.completed {
+  cursor: pointer;
+}
+
+.step-number {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  color: var(--comedy-light);
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-bottom: 0.8rem;
+  transition: all 0.3s ease;
+}
+
+.progress-step.active .step-number {
+  background: var(--comedy-primary);
+  border-color: var(--comedy-accent);
+  transform: scale(1.1);
+  box-shadow: 0 0 15px rgba(255, 87, 87, 0.5);
+}
+
+.progress-step.completed .step-number {
+  background: var(--comedy-success);
+  border-color: var(--comedy-accent);
+}
+
+.step-label {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.progress-step.active .step-label {
+  color: var(--comedy-light);
+  font-weight: bold;
+}
+
+.progress-line {
+  flex: 1;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.1);
+  position: relative;
+  z-index: 1;
+  margin: 0 5px;
+  transform: translateY(-20px);
+}
+
+.progress-line.active {
+  background: linear-gradient(to right, var(--comedy-accent), var(--comedy-primary));
+  box-shadow: 0 0 10px rgba(255, 87, 87, 0.3);
+}
+
+/* Content area */
+.comedy-booking-content {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 2rem;
+}
+
+/* Sidebar */
+.comedy-booking-sidebar {
+  padding-top: 1rem;
+}
+
+.show-poster {
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--booking-shadow);
+  position: relative;
+  margin-bottom: 2rem;
+  border: var(--booking-border);
+}
+
+.show-poster img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.poster-caption {
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.2));
+  padding: 1rem;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
+.caption-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.caption-icon {
+  font-size: 1.2rem;
+}
+
+.booking-summary-sidebar {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  border: 2px solid rgba(255, 255, 255, 0.05);
+}
+
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+}
+
+.summary-item .label {
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.summary-item .value {
+  color: var(--comedy-light);
+}
+
+/* Main booking steps area */
+.comedy-booking-steps {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  padding: 2rem;
+  color: var(--comedy-text);
+  box-shadow: var(--booking-shadow);
+  position: relative;
+  overflow: hidden;
+  border: var(--booking-border);
+}
+
+.comedy-booking-steps h3 {
+  font-family: 'Bangers', cursive;
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  color: var(--comedy-primary);
+  letter-spacing: 1px;
+}
+
+/* Animations for step transitions */
+.slide-in {
+  animation: slideIn 0.5s forwards;
+}
+
+.slide-out {
+  animation: slideOut 0.3s forwards;
+}
+
+.success-animation {
+  animation: success 0.8s forwards;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(50px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideOut {
+  from { opacity: 1; transform: translateX(0); }
+  to { opacity: 0; transform: translateX(-50px); }
+}
+
+@keyframes success {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); box-shadow: 0 0 30px rgba(38, 222, 129, 0.5); }
+  100% { transform: scale(1); }
+}
+
+/* Date and time selection */
+.date-selection, .time-selection {
+  margin-bottom: 2rem;
+}
+
+.date-options {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+}
+
+.date-option {
+  min-width: 80px;
+  padding: 1rem 0.5rem;
+  border-radius: 10px;
+  background: #f5f5f5;
+  border: 2px solid #e6e6e6;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.date-option:hover {
+  transform: translateY(-3px);
+  border-color: var(--comedy-accent);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.date-option.selected {
+  background: var(--comedy-primary);
+  border-color: var(--comedy-accent);
+  color: white;
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 5px 15px rgba(255, 87, 87, 0.3);
+}
+
+.day {
+  font-weight: bold;
+  margin-bottom: 0.3rem;
+}
+
+.date {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 0.2rem;
+}
+
+.month {
+  font-size: 0.9rem;
+}
+
+.time-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 1rem;
+}
+
+.time-option {
+  padding: 1rem;
+  border-radius: 10px;
+  background: #f5f5f5;
+  border: 2px solid #e6e6e6;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.time-option:hover {
+  transform: translateY(-3px);
+  border-color: var(--comedy-accent);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.time-option.selected {
+  background: var(--comedy-primary);
+  border-color: var(--comedy-accent);
+  color: white;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(255, 87, 87, 0.3);
+}
+
+.time-text {
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.seats-left {
+  font-size: 0.8rem;
+  opacity: 0.8;
+}
+
+.show-description {
+  background: #f5f5f5;
+  border-radius: 10px;
+  padding: 1.5rem;
+  margin-top: 2rem;
+}
+
+.show-features {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.feature {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.feature-icon {
+  font-size: 1.3rem;
+}
+
+/* Seat selection */
+.seat-selection-note {
+  background: #fff9db;
+  border-left: 4px solid var(--comedy-accent);
+  padding: 1rem;
+  margin-bottom: 2rem;
+  border-radius: 0 10px 10px 0;
+}
+
+.theater-layout {
+  margin-bottom: 2rem;
+}
+
+.stage {
+  background: linear-gradient(45deg, var(--comedy-primary), var(--comedy-secondary));
+  height: 50px;
+  border-radius: 50% / 100% 100% 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  margin-bottom: 3rem;
+  position: relative;
+  box-shadow: 0 5px 15px rgba(255, 87, 87, 0.3);
+}
+
+.stage::before {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70%;
+  height: 10px;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+}
+
+.seats-container {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 10px;
+  margin-bottom: 2rem;
+}
+
+.seat {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.8rem;
+  border: 2px solid #ddd;
+  background: #f5f5f5;
+}
+
+.seat.available:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  border-color: var(--comedy-accent);
+}
+
+.seat.selected {
+  background: var(--comedy-primary);
+  color: white;
+  border-color: var(--comedy-accent);
+  transform: translateY(-3px);
+  box-shadow: 0 5px 10px rgba(255, 87, 87, 0.3);
+}
+
+.seat.unavailable {
+  background: #e6e6e6;
+  color: #a0a0a0;
+  cursor: not-allowed;
+  border-color: #d0d0d0;
+}
+
+.seat.premium {
+  background: #fff9db;
+  border-color: var(--comedy-accent);
+}
+
+.seat.premium.selected {
+  background: var(--comedy-accent);
+  color: var(--comedy-text);
+  border-color: var(--comedy-primary);
+}
+
+.seat-label {
+  font-weight: bold;
+}
+
+.seat-legend {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.legend-box {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  border: 2px solid #ddd;
+}
+
+.legend-box.available {
+  background: #f5f5f5;
+}
+
+.legend-box.selected {
+  background: var(--comedy-primary);
+  border-color: var(--comedy-accent);
+}
+
+.legend-box.unavailable {
+  background: #e6e6e6;
+  border-color: #d0d0d0;
+}
+
+.legend-box.premium {
+  background: #fff9db;
+  border-color: var(--comedy-accent);
+}
+
+.selected-seats-summary {
+  background: #f5f5f5;
+  border-radius: 10px;
+  padding: 1.5rem;
+  margin-top: 2rem;
+}
+
+.selected-seats-summary h4 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+.selected-seats-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.selected-seat-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.8rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.seat-id {
+  font-weight: bold;
+}
+
+.seat-price {
+  font-weight: bold;
+  color: var(--comedy-primary);
+}
+
+.price-inr {
+  font-size: 0.8rem;
+  opacity: 0.8;
+  margin-left: 0.3rem;
+}
+
+.no-seats-message {
+  color: #888;
+  font-style: italic;
+}
+
+/* Payment section */
+.booking-summary {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.summary-card, .customer-card {
+  background: #f5f5f5;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.summary-header {
+  background: var(--comedy-primary);
+  color: white;
+  padding: 1rem 1.5rem;
+}
+
+.summary-heading {
+  margin: 0;
+  font-size: 1.3rem;
+}
+
+.summary-content {
+  padding: 1.5rem;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+}
+
+.detail-label {
+  font-weight: bold;
+  color: #666;
+}
+
+.price-breakdown {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px dashed #ddd;
+}
+
+.price-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.8rem;
+}
+
+.price-row.total {
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #ddd;
+}
+
+.price-label {
+  color: #666;
+}
+
+.payment-section {
+  padding: 1.5rem;
+}
+
+.payment-section h4 {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+}
+
+.payment-options {
+  display: flex;
+  gap: 1rem;
+}
+
+.payment-option {
+  flex: 1;
+  padding: 1rem;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.payment-option:hover {
+  transform: translateY(-3px);
+  border-color: var(--comedy-accent);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.payment-option.selected {
+  border-color: var(--comedy-primary);
+  background: #fff9db;
+}
+
+.payment-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background: #f5f5f5;
+}
+
+.payment-icon.credit-card {
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23333"><path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/></svg>') center/60% no-repeat #f5f5f5;
+}
+
+.payment-icon.paypal {
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23333"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM14 13v4h-4v-4H7l5-5 5 5h-3z"/></svg>') center/60% no-repeat #f5f5f5;
+}
+
+.payment-icon.apple-pay {
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23333"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>') center/60% no-repeat #f5f5f5;
+}
+
+/* Navigation buttons */
+.booking-navigation {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #eee;
+}
+
+.prev-button,
+.next-button,
+.book-button {
+  padding: 0.8rem 1.5rem;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+  border: none;
+}
+
+.prev-button {
+  background: #f5f5f5;
+  color: #666;
+  border: 2px solid #ddd;
+}
+
+.prev-button:hover {
+  background: #eee;
+  transform: translateX(-3px);
+}
+
+.next-button {
+  background: var(--comedy-primary);
+  color: white;
+  box-shadow: 0 5px 15px rgba(255, 87, 87, 0.3);
+}
+
+.next-button:hover {
+  transform: translateX(3px);
+  box-shadow: 0 5px 20px rgba(255, 87, 87, 0.4);
+}
+
+.next-button:disabled {
+  background: #ddd;
+  color: #999;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.book-button {
+  background: var(--comedy-accent);
+  color: var(--comedy-text);
+  box-shadow: 0 5px 15px rgba(255, 204, 41, 0.3);
+  font-weight: bold;
+}
+
+.book-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(255, 204, 41, 0.4);
+}
+
+.btn-icon {
+  font-size: 1.2rem;
+}
+
+/* Comedy booking page error */
+.comedy-booking-page-error {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+  background: var(--comedy-dark);
+  color: var(--comedy-light);
+}
+
+.comedy-booking-page-error h2 {
+  font-family: 'Bangers', cursive;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  letter-spacing: 1px;
+  text-shadow: 3px 3px 0 rgba(0, 0, 0, 0.5);
+}
+
+.comedy-booking-page-error .back-button {
+  display: inline-block;
+  margin-top: 1.5rem;
+  background: var(--comedy-primary);
+  color: white;
+  padding: 0.8rem 1.5rem;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(255, 87, 87, 0.3);
+}
+
+.comedy-booking-page-error .back-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(255, 87, 87, 0.4);
+}
+
+/* Responsive design */
+@media (max-width: 992px) {
+  .comedy-booking-content {
+    grid-template-columns: 1fr;
+  }
+  
+  .comedy-booking-sidebar {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+  
+  .booking-summary {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .show-headline h1 {
+    font-size: 2.5rem;
+  }
+  
+  .comedy-booking-sidebar {
+    grid-template-columns: 1fr;
+  }
+  
+  .seats-container {
+    grid-template-columns: repeat(6, 1fr);
+    padding: 0 5%;
+  }
+  
+  .show-features {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .date-options {
+    justify-content: flex-start;
+  }
+  
+  .seat-legend {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 576px) {
+  .comedy-booking-container {
+    padding: 1rem;
+  }
+  
+  .show-headline h1 {
+    font-size: 1.8rem;
+  }
+  
+  .seats-container {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  
+  .booking-progress {
+    padding: 0;
+  }
+  
+  .step-number {
+    width: 30px;
+    height: 30px;
+    font-size: 1rem;
+  }
+  
+  .step-label {
+    font-size: 0.8rem;
+  }
+  
+  .date-options {
+    justify-content: space-between;
+  }
+  
+  .date-option {
+    min-width: 60px;
+  }
+  
+  .payment-options {
+    flex-direction: column;
+  }
+  
+  .header-top {
+    align-items: flex-start;
+  }
+} 

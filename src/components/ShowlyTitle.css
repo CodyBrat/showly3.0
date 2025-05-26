@@ -1,0 +1,93 @@
+/* ShowlyTitle component styles */
+.brand-section {
+  text-align: center;
+  padding: 20px;
+  margin: 0 auto;
+  max-width: 100%;
+  z-index: 2;
+}
+
+.proximity-text {
+  display: inline-block;
+  position: relative;
+  z-index: 2;
+}
+
+.letter {
+  display: inline-block;
+  position: relative;
+  transition: transform 0.1s ease-out, filter 0.1s ease-out, opacity 0.1s ease-out;
+}
+
+.brand {
+  font-size: 12rem;
+  font-weight: 450;
+  letter-spacing: -2px;
+  font-style: normal;
+  line-height: 0.9;
+  margin-bottom: 2rem;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.95) 0%, rgba(230,230,230,0.9) 40%, rgba(180,180,180,0.85) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 2px rgba(255,255,255,0.05));
+}
+
+.tagline {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.7);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  font-weight: 300;
+  margin-bottom: 40px;
+}
+
+/* Responsive styles */
+@media (max-width: 1200px) {
+  .brand {
+    font-size: 10rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .brand {
+    font-size: 8rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .brand {
+    font-size: 6rem;
+  }
+  
+  .tagline {
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+  }
+}
+
+@media (max-width: 480px) {
+  .brand {
+    font-size: 4rem;
+  }
+  
+  .tagline {
+    font-size: 0.8rem;
+    letter-spacing: 1.5px;
+  }
+} 
+
+.proximity-text .letter {
+  position: relative;
+  display: inline-block;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.95) 0%, rgba(230,230,230,0.9) 40%, rgba(180,180,180,0.85) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+  filter: drop-shadow(0 0 2px rgba(255,255,255,0.05));
+  will-change: transform, filter, opacity;
+  pointer-events: none;
+  transform-origin: center center;
+  letter-spacing: -0.05em;
+}
